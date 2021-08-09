@@ -40,7 +40,7 @@ export class AppComponent implements OnInit {
 
     this.sharedDataService.insertData(this.data);
 
-    this.sharedDataService.data.subscribe(dataObject =>{
+    this.sharedDataService.getData().subscribe(dataObject =>{
       this.dataShared = dataObject;
       console.log("dataShared =" + JSON.stringify(this.dataShared))
     })

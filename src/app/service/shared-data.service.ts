@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import {  BehaviorSubject} from 'rxjs';
+import {  BehaviorSubject, Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,9 +8,15 @@ import {  BehaviorSubject} from 'rxjs';
 export class SharedDataService {
 
   private dataSet = new BehaviorSubject<any>(null);
-  data = this.dataSet.asObservable()
-  constructor() { }
- public insertData( data: any) {
+
+  public insertData( data: any) {
     this.dataSet.next(data);
   }
+
+  public getData(): Observable<any> {
+  return this.dataSet.asObservable();
+  }
+  
+  constructor() { }
+ 
 }
