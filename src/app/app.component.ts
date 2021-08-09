@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClientService } from "./http-client.service";
 import { SendMoney } from './models/model';
+import { SharedDataService } from './service/shared-data.service';
 
 
 @Component({
@@ -13,10 +14,9 @@ export class AppComponent implements OnInit {
 
   formData: any;
   data: Array<SendMoney> = [];
+  dataShared: Array<SendMoney> = [];
 
-  constructor(public service: HttpClientService) {
-
-
+  constructor(public service: HttpClientService, public  sharedDataService: SharedDataService) {
 
   }
 
@@ -25,6 +25,10 @@ export class AppComponent implements OnInit {
 
     this.formData = this.service.getDataFromServer();
     console.log("data =" + JSON.stringify(this.service.getDataFromServer()))
+
+    
+
+
     for (let key in this.formData["linksMapping"]) {
       let sendMoney = {} as SendMoney;
       sendMoney.title = key;
@@ -33,6 +37,13 @@ export class AppComponent implements OnInit {
       sendMoney.web = this.formData["linksMapping"][key].web;
       this.data.push(sendMoney)
     }
+
+    this.sharedDataService.insertData(this.data);
+
+    this.sharedDataService.data.subscribe(dataObject =>{
+      this.dataShared = dataObject;
+      console.log("dataShared =" + JSON.stringify(this.dataShared))
+    })
 
     console.log("linkMappingObject =" + JSON.stringify(this.data))
   }
