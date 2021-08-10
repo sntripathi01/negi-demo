@@ -1,0 +1,33 @@
+<div *ngFor="let item of data;" class="example-box">
+    <p>Title:{{item.title}} </p>
+    <div>
+        <label>
+            R3
+            <input type="text" [(ngModel)]="item.r3">
+        </label>
+        <label>
+            RN
+            <input type="text" [(ngModel)]='item.rn'>
+        </label>
+        <label>
+            WEB
+            <input type="text" [(ngModel)]='item.web'>
+        </label>
+        <button class="button" (click)='updateData(item.title, item.r3, item.rn, item.web)'>Update</button>
+        <button class="buttonD" (click)='deleteData(item.title)'> Delete</button>
+    </div>
+</div>
+
+<select>
+    <option *ngFor="let data of selectData; let i = index" [value]="data">
+        {{data}}
+    </option>
+</select>
+<hr />
+
+<app-select-list [selectData]="selectData">
+</app-select-list>
+
+<hr />
+
+<app-select-box [selectData]="selectData"></app-select-box>

@@ -1,0 +1,9 @@
+<p>select-list works!</p>
+
+<select>
+    <option *ngFor="let data of selectData; let i = index" [value]="data">
+        {{data}}
+    </option>
+</select>
+<hr/>
+<app-select-box [selectData]="selectData"></app-select-box>
